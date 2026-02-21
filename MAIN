@@ -1,0 +1,45 @@
+#define BLYNK_TEMPLATE_ID "TMPL3JZam7Pkt"
+#define BLYNK_TEMPLATE_NAME "SmartChair"
+#define BLYNK_AUTH_TOKEN "goNP-bidWNXpGt0_zn83Y6pZt5gUrdD_"
+
+#include <WiFi.h>
+#include <BlynkSimpleEsp32.h>
+
+char ssid[] = "iPhone (155)";
+char pass[] = "987654321";
+
+const int fsr1 = 34;
+const int fsr2 = 35;
+
+int threshold = 4000;
+
+BlynkTimer timer;
+
+void sendChairStatus()
+{
+  int value1 = analogRead(fsr1);
+  int value2 = analogRead(fsr2);
+
+  // Send 1 if occupied, 0 if free
+  Blynk.virtualWrite(V0, value1 > threshold ? 1 : 0);
+  Blynk.virtualWrite(V1, value2 > threshold ? 1 : 0);
+
+  Serial.print("Chair1: ");
+  Serial.print(value1);
+  Serial.print("   Chair2: ");
+  Serial.println(value2);
+}
+
+
+void setup()
+{
+  Serial.begin(115200);
+  Blynk.begin(BLYNK_AUTH_TOKEN, ssid, pass);
+  timer.setInterval(2000L, sendChairStatus);
+}
+
+void loop()
+{
+  Blynk.run();
+  timer.run();
+}
