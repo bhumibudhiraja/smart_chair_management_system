@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🪑 Smart Chair Manager</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Header with live stats -->
+    <header class="header">
+        <div class="container">
+            <h1>🪑 Smart Chair Manager</h1>
+            <div class="stats">
+                <div class="stat-card free">
+                    <span class="number" id="freeCount">0</span>
+                    <span>Free Chairs</span>
+                </div>
+                <div class="stat-card occupied">
+                    <span class="number" id="occupiedCount">0</span>
+                    <span>Occupied</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- All chairs appear here -->
+    <main class="container">
+        <div class="chair-grid" id="chairGrid">
+            <!-- Magic happens here! -->
+        </div>
+    </main>
+
+    <!-- Live update magic -->
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
